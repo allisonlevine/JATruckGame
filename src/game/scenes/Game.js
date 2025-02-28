@@ -103,6 +103,7 @@ export class Game extends Scene
             this.inTheWayTrucks.getChildren().forEach((truck) => {
                 truck.body.reset(truck.x, truck.y);
                 this.beep.play();
+                this.car.stop();
             });
         }
     }
