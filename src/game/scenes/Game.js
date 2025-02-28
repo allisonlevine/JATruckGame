@@ -28,13 +28,13 @@ export class Game extends Scene
           ];
     
         const inTheWayTruckPositions = [
-          { x: 150, y: 100, targetSpot: 0, truckType: 'redTruck'},
-          { x: 150, y: 200, targetSpot: 1, truckType: 'redTruck'},
-          { x: 150, y: 300, targetSpot: 2, truckType: 'redTruck'},
-          { x: 150, y: 400, targetSpot: 3, truckType: 'redTruck'},
-          { x: 150, y: 500, targetSpot: 4, truckType: 'redTruck'},
-          { x: 150, y: 600, targetSpot: 5, truckType: 'redTruck'},
-          { x: 150, y: 700, targetSpot: 6, truckType: 'blueTruck'},
+          { x: 150, y: 100, targetSpot: 0, truckType: 'normalTruck'},
+          { x: 150, y: 200, targetSpot: 1, truckType: 'normalTruck'},
+          { x: 150, y: 300, targetSpot: 2, truckType: 'normalTruck'},
+          { x: 150, y: 400, targetSpot: 3, truckType: 'normalTruck'},
+          { x: 150, y: 500, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 150, y: 600, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 150, y: 700, targetSpot: 6, truckType: 'starTruck'},
         ];
 
         spots.forEach((spot) => {

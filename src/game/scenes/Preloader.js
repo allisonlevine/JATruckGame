@@ -32,8 +32,8 @@ export class Preloader extends Scene
         //  Load the assets for the game
         this.load.setPath('assets');
         this.load.image('logo', 'logo.png');
-        this.load.image('redTruck','rt.png');
-        this.load.image('blueTruck', 'bt-resize.png');
+        this.load.image('normalTruck','NormalTruck.png');
+        this.load.image('starTruck', 'StarTruck.png');
         this.load.image('parkinglot', 'parkinglot.jpg');
     }
 
