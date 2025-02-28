@@ -1,5 +1,5 @@
 import { EventBus } from '../EventBus';
-import { Scene, Phaser, Math } from 'phaser';
+import { Scene, Math } from 'phaser';
 
 export class Game extends Scene
 {
@@ -14,6 +14,7 @@ export class Game extends Scene
 
     create ()
     {
+        this.addSound();
         this.add.image(512, 384, 'parkinglot');
         this.parkingSpots = this.physics.add.staticGroup();
         this.inTheWayTrucks = this.physics.add.group();
@@ -61,6 +62,12 @@ export class Game extends Scene
         EventBus.emit('current-scene-ready', this);
     }
 
+    addSound() {
+        this.sound.add('background', { loop: true }).play();
+        this.beep = this.sound.add('beep');
+        this.car = this.sound.add('car');
+    }
+
     setDestination(target){
         this.target = target;
     }
@@ -84,6 +91,7 @@ export class Game extends Scene
             if (distance < tolerance)
             {
                 this.source.body.reset(this.target.x, this.target.y);
+                this.car.stop();
                 if(this.source.targetSpot == 6)
                 {
                     this.changeScene();
@@ -93,8 +101,9 @@ export class Game extends Scene
         if (this.physics.collide(this.inTheWayTrucks))
         {
             this.inTheWayTrucks.getChildren().forEach((truck) => {
-                truck.body.reset(truck.x, truck.y)
-            })
+                truck.body.reset(truck.x, truck.y);
+                this.beep.play();
+            });
         }
     }
 
@@ -102,6 +111,7 @@ export class Game extends Scene
         const spot = this.parkingSpots.getChildren()[truck.targetSpot];
         this.source = truck;
         this.target = spot;
+        this.car.play();
         this.physics.moveToObject(this.source, this.target, 200);
     }
 
