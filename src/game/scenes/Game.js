@@ -14,21 +14,27 @@ export class Game extends Scene
 
     create ()
     {
-        //this.cameras.main.setBackgroundColor(0x00ff00);
-
         this.add.image(512, 384, 'parkinglot');
         this.parkingSpots = this.physics.add.staticGroup();
         this.inTheWayTrucks = this.physics.add.group();
         const spots = [
-            { x: 900, y: 100 },
-            { x: 0, y: 100 },
-            { x: 300, y: 100 },
+            { x: 250, y: 100 },
+            { x: 250, y: 200 },
+            { x: 250, y: 300 },
+            { x: 250, y: 400 },
+            { x: 250, y: 500 },
+            { x: 250, y: 600 },
+            { x: 150, y: 150 }
           ];
     
         const inTheWayTruckPositions = [
-          { x: 150, y: 100, targetSpot: 0},
-          { x: 250, y: 100, targetSpot: 1},
-          { x: 350, y: 100, targetSpot: 2}
+          { x: 150, y: 100, targetSpot: 0, truckType: 'redTruck'},
+          { x: 150, y: 200, targetSpot: 1, truckType: 'redTruck'},
+          { x: 150, y: 300, targetSpot: 2, truckType: 'redTruck'},
+          { x: 150, y: 400, targetSpot: 3, truckType: 'redTruck'},
+          { x: 150, y: 500, targetSpot: 4, truckType: 'redTruck'},
+          { x: 150, y: 600, targetSpot: 5, truckType: 'redTruck'},
+          { x: 150, y: 700, targetSpot: 6, truckType: 'blueTruck'},
         ];
 
         spots.forEach((spot) => {
@@ -38,7 +44,7 @@ export class Game extends Scene
     
 
         inTheWayTruckPositions.forEach((truckPos) => {
-          const truck = this.inTheWayTrucks.create(truckPos.x, truckPos.y, 'redTruck');
+          const truck = this.inTheWayTrucks.create(truckPos.x, truckPos.y, truckPos.truckType);
           truck.setInteractive();
           truck.targetSpot = truckPos.targetSpot;
           truck.initialX = truckPos.x;
@@ -78,7 +84,17 @@ export class Game extends Scene
             if (distance < tolerance)
             {
                 this.source.body.reset(this.target.x, this.target.y);
+                if(this.source.targetSpot == 6)
+                {
+                    this.changeScene();
+                }
             }
+        }
+        if (this.physics.collide(this.inTheWayTrucks))
+        {
+            this.inTheWayTrucks.getChildren().forEach((truck) => {
+                truck.body.reset(truck.x, truck.y)
+            })
         }
     }
 
@@ -87,9 +103,6 @@ export class Game extends Scene
         this.source = truck;
         this.target = spot;
         this.physics.moveToObject(this.source, this.target, 200);
-
-
-
     }
 
     changeScene ()
