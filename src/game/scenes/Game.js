@@ -18,29 +18,131 @@ export class Game extends Scene
         this.add.image(512, 384, 'parkinglot');
         this.parkingSpots = this.physics.add.staticGroup();
         this.inTheWayTrucks = this.physics.add.group();
-        const spots = [
-            { x: 250, y: 100 },
-            { x: 250, y: 200 },
-            { x: 250, y: 300 },
-            { x: 250, y: 400 },
-            { x: 250, y: 500 },
-            { x: 250, y: 600 },
-            { x: 150, y: 150 }
+        const spots = [            
+            { x: 900, y: 650 }, //0 - goal point
+            { x: 100, y: 700 }, //1 - bottom row left
+            { x: 850, y: 700 }, //2 - bottom row right
+            { x: 370, y: 100 }, //3 - left vertical column
+            { x: 300, y: 400 }, //4 - left vertical column free
+            { x: 300, y: 450 }, //5 - left vertical column free
+            { x: 530, y: 100 }, //6 - Middle road thing left
+            { x: 590, y: 100 }, //7 - middle road thing right
+            { x: 840, y: 220 }, //8 - Right Lot vertical trucks
+            { x: 830, y: 500 }, //9 - Right Lot second bottom row
+            { x: 830, y: 550 }, //10 - Right Lot Bottom Row
+            { x: 750, y: 550 }  //11 - Last truck in the way
           ];
     
         const inTheWayTruckPositions = [
-          { x: 150, y: 100, targetSpot: 0, truckType: 'normalTruck'},
-          { x: 150, y: 200, targetSpot: 1, truckType: 'normalTruck'},
-          { x: 150, y: 300, targetSpot: 2, truckType: 'normalTruck'},
-          { x: 150, y: 400, targetSpot: 3, truckType: 'normalTruck'},
-          { x: 150, y: 500, targetSpot: 4, truckType: 'normalTruck'},
-          { x: 150, y: 600, targetSpot: 5, truckType: 'normalTruck'},
-          { x: 150, y: 700, targetSpot: 6, truckType: 'starTruck'},
+          //Left Column
+          { x: 120, y: 200, targetSpot: 3, truckType: 'normalTruck'},
+          { x: 120, y: 250, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 120, y: 300, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 120, y: 350, targetSpot: 6, truckType: 'normalTruck'},
+          { x: 120, y: 400, targetSpot: 3, truckType: 'normalTruck'},
+          { x: 120, y: 450, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 120, y: 500, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 120, y: 550, targetSpot: 6, truckType: 'normalTruck'},
+
+        //Second Left Column
+          { x: 210, y: 200, targetSpot: 3, truckType: 'normalTruck'},
+          { x: 210, y: 250, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 210, y: 300, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 210, y: 350, targetSpot: 6, truckType: 'normalTruck'},
+          { x: 210, y: 400, targetSpot: 3, truckType: 'normalTruck'},
+          { x: 210, y: 450, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 210, y: 500, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 210, y: 550, targetSpot: 6, truckType: 'normalTruck'},
+
+        //Third Left Column
+          { x: 300, y: 200, targetSpot: 3, truckType: 'normalTruck'},
+          { x: 300, y: 250, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 300, y: 300, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 300, y: 350, targetSpot: 6, truckType: 'normalTruck'},
+          { x: 350, y: 400, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 350, y: 450, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 300, y: 500, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 300, y: 550, targetSpot: 6, truckType: 'normalTruck'},
+
+        //Fourth Left Column
+          { x: 440, y: 200, targetSpot: 3, truckType: 'normalTruck'},
+          { x: 440, y: 250, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 440, y: 300, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 440, y: 350, targetSpot: 6, truckType: 'normalTruck'},
+          { x: 440, y: 400, targetSpot: 3, truckType: 'normalTruck'},
+          { x: 440, y: 450, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 440, y: 500, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 440, y: 550, targetSpot: 6, truckType: 'normalTruck'},
+
+        //bottom row wall
+          { x: 200, y: 700, targetSpot: 2, truckType: 'normalTruck'},
+          { x: 300, y: 700, targetSpot: 1, truckType: 'normalTruck'},
+          { x: 400, y: 700, targetSpot: 1, truckType: 'normalTruck'},
+          { x: 500, y: 700, targetSpot: 1, truckType: 'normalTruck'},
+          { x: 600, y: 700, targetSpot: 1, truckType: 'normalTruck'},
+          { x: 700, y: 700, targetSpot: 1, truckType: 'normalTruck'},
+          { x: 800, y: 700, targetSpot: 1, truckType: 'normalTruck'},
+
+        //Left Vertical column
+          { x: 370, y: 630, targetSpot: 3, truckType: 'verticalTruck'},
+          { x: 370, y: 530, targetSpot: 3, truckType: 'verticalTruck'},
+
+        //Middle Road Thing
+          { x: 530, y: 180, targetSpot: 6, truckType: 'verticalTruck'},
+          { x: 530, y: 270, targetSpot: 6, truckType: 'verticalTruck'},
+          { x: 530, y: 360, targetSpot: 6, truckType: 'verticalTruck'},
+          { x: 530, y: 450, targetSpot: 6, truckType: 'verticalTruck'},
+          { x: 530, y: 540, targetSpot: 6, truckType: 'verticalTruck'},
+          { x: 530, y: 630, targetSpot: 6, truckType: 'verticalTruck'},
+
+          { x: 590, y: 180, targetSpot: 7, truckType: 'verticalTruck'},
+          { x: 590, y: 270, targetSpot: 7, truckType: 'verticalTruck'},
+          { x: 590, y: 360, targetSpot: 7, truckType: 'verticalTruck'},
+          { x: 590, y: 450, targetSpot: 7, truckType: 'verticalTruck'},
+          { x: 590, y: 540, targetSpot: 7, truckType: 'verticalTruck'},
+          { x: 590, y: 630, targetSpot: 7, truckType: 'verticalTruck'},
+
+        //Right Lot Left Column
+          { x: 680, y: 200, targetSpot: 3, truckType: 'normalTruck'},
+          { x: 680, y: 250, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 680, y: 300, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 680, y: 350, targetSpot: 6, truckType: 'normalTruck'},
+          { x: 680, y: 400, targetSpot: 3, truckType: 'normalTruck'},
+          { x: 680, y: 450, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 680, y: 500, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 680, y: 550, targetSpot: 6, truckType: 'normalTruck'},
+
+        //Right Lot Middle Column
+          { x: 770, y: 200, targetSpot: 3, truckType: 'normalTruck'},
+          { x: 770, y: 250, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 770, y: 300, targetSpot: 5, truckType: 'normalTruck'},
+          { x: 770, y: 350, targetSpot: 6, truckType: 'normalTruck'},
+          { x: 770, y: 400, targetSpot: 3, truckType: 'normalTruck'},
+          { x: 770, y: 450, targetSpot: 4, truckType: 'normalTruck'},
+          { x: 770, y: 500, targetSpot: 9, truckType: 'normalTruck'},
+          { x: 770, y: 550, targetSpot: 10, truckType: 'normalTruck'},
+        
+        //Right Lot Right Column
+          { x: 840, y: 320, targetSpot: 8, truckType: 'verticalTruck'},
+          { x: 840, y: 410, targetSpot: 8, truckType: 'verticalTruck'},
+          { x: 840, y: 500, targetSpot: 8, truckType: 'verticalTruck'},
+
+        //Last truck in the way
+          { x: 750, y: 630, targetSpot: 11, truckType: 'verticalTruck'},
+
+        //Goal truck
+          { x: 200, y: 650, targetSpot: 0, truckType: 'starTruck'},
         ];
 
         spots.forEach((spot) => {
-            //xyz added for visual, not real
-            this.parkingSpots.create(spot.x, spot.y, 'xyz');
+            if(spot.x == 900)
+                {
+                    this.parkingSpots.create(spot.x, spot.y, 'circle');
+                }
+                else
+                {
+                    this.parkingSpots.create(spot.x, spot.y, 'nothing');
+                }
           });
     
 
@@ -92,7 +194,7 @@ export class Game extends Scene
             {
                 this.source.body.reset(this.target.x, this.target.y);
                 this.car.stop();
-                if(this.source.targetSpot == 6)
+                if(this.source.targetSpot == 0)
                 {
                     this.changeScene();
                 }

@@ -33,11 +33,14 @@ export class Preloader extends Scene
         this.load.setPath('assets');
         this.load.image('logo', 'logo.png');
         this.load.image('normalTruck','NormalTruck.png');
+        this.load.image('verticalTruck', 'NormalTruckVertical.png');
         this.load.image('starTruck', 'StarTruck.png');
         this.load.image('parkinglot', 'parkinglot.jpg');
         this.load.audio('background', 'sounds/background.mp3');
         this.load.audio('car', 'sounds/drive.mp3');
         this.load.audio('beep', 'sounds/CARHORN4.mp3');
+        this.load.image('nothing', 'transparent_square.png');
+        this.load.image('circle', 'yellow_circle.png');
     }
 
     create ()
